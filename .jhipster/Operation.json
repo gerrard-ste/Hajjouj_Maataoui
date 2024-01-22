@@ -1,0 +1,52 @@
+{
+  "annotations": {
+    "changelogDate": "20240118210937"
+  },
+  "applications": "*",
+  "clientRootFolder": "projetmicroservice",
+  "databaseType": "sql",
+  "entityTableName": "operation",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "heure",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "urgence",
+      "fieldType": "Boolean"
+    }
+  ],
+  "microserviceName": "projetmicroservice",
+  "name": "Operation",
+  "relationships": [
+    {
+      "otherEntityName": "ressources",
+      "relationshipName": "ressources",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "salleOperation",
+      "relationshipName": "salleOperation",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "medecin",
+      "relationshipName": "personnel",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "dossierPatient",
+      "relationshipName": "dossierPatient",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

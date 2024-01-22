@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20240118211137"
+  },
+  "applications": "*",
+  "clientRootFolder": "projetmicroservice",
+  "databaseType": "sql",
+  "entityTableName": "ressources",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "disponibilite",
+      "fieldType": "Boolean"
+    }
+  ],
+  "microserviceName": "projetmicroservice",
+  "name": "Ressources",
+  "relationships": [
+    {
+      "otherEntityName": "salleOperation",
+      "relationshipName": "salleOperation",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "medecin",
+      "relationshipName": "personnel",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

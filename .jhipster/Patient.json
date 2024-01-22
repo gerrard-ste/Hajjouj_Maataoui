@@ -1,0 +1,40 @@
+{
+  "annotations": {
+    "changelogDate": "20240118211037"
+  },
+  "applications": "*",
+  "clientRootFolder": "projetmicroservice",
+  "databaseType": "sql",
+  "entityTableName": "patient",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "historiqueMedical",
+      "fieldType": "String"
+    }
+  ],
+  "microserviceName": "projetmicroservice",
+  "name": "Patient",
+  "relationships": [
+    {
+      "otherEntityName": "dossierPatient",
+      "relationshipName": "dossierPatient",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "consentementInformatise",
+      "relationshipName": "consentementInformatise",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

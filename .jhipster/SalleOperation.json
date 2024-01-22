@@ -1,0 +1,23 @@
+{
+  "annotations": {
+    "changelogDate": "20240118211237"
+  },
+  "applications": "*",
+  "clientRootFolder": "projetmicroservice",
+  "databaseType": "sql",
+  "entityTableName": "salle_operation",
+  "fields": [
+    {
+      "fieldName": "equipementsDisponibles",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "disponibilite",
+      "fieldType": "Boolean"
+    }
+  ],
+  "microserviceName": "projetmicroservice",
+  "name": "SalleOperation",
+  "relationships": [],
+  "searchEngine": "no"
+}

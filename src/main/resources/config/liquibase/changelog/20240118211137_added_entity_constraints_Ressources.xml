@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Ressources.
+    -->
+    <changeSet id="20240118211137-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="salle_operation_id"
+                                 baseTableName="ressources"
+                                 constraintName="fk_ressources__salle_operation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="salle_operation"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="personnel_id"
+                                 baseTableName="ressources"
+                                 constraintName="fk_ressources__personnel_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="medecin"
+                                 />
+    </changeSet>
+</databaseChangeLog>

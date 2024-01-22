@@ -1,0 +1,139 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-operation-heading" data-cy="OperationCreateUpdateHeading">Créer ou éditer un Operation</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_date">Date</label>
+          <div class="input-group">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="text"
+              class="form-control"
+              name="date"
+              ngbDatepicker
+              #dateDp="ngbDatepicker"
+              formControlName="date"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_heure">Heure</label>
+          <div class="d-flex">
+            <input
+              id="field_heure"
+              data-cy="heure"
+              type="datetime-local"
+              class="form-control"
+              name="heure"
+              formControlName="heure"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_urgence">Urgence</label>
+          <input type="checkbox" class="form-check" name="urgence" id="field_urgence" data-cy="urgence" formControlName="urgence" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ressources">Ressources</label>
+          <select
+            class="form-control"
+            id="field_ressources"
+            data-cy="ressources"
+            name="ressources"
+            formControlName="ressources"
+            [compareWith]="compareRessources"
+          >
+            <option [ngValue]="null"></option>
+            @for (ressourcesOption of ressourcesSharedCollection; track $index) {
+              <option [ngValue]="ressourcesOption">{{ ressourcesOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_salleOperation">Salle Operation</label>
+          <select
+            class="form-control"
+            id="field_salleOperation"
+            data-cy="salleOperation"
+            name="salleOperation"
+            formControlName="salleOperation"
+            [compareWith]="compareSalleOperation"
+          >
+            <option [ngValue]="null"></option>
+            @for (salleOperationOption of salleOperationsSharedCollection; track $index) {
+              <option [ngValue]="salleOperationOption">{{ salleOperationOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_personnel">Personnel</label>
+          <select
+            class="form-control"
+            id="field_personnel"
+            data-cy="personnel"
+            name="personnel"
+            formControlName="personnel"
+            [compareWith]="compareMedecin"
+          >
+            <option [ngValue]="null"></option>
+            @for (medecinOption of medecinsSharedCollection; track $index) {
+              <option [ngValue]="medecinOption">{{ medecinOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dossierPatient">Dossier Patient</label>
+          <select
+            class="form-control"
+            id="field_dossierPatient"
+            data-cy="dossierPatient"
+            name="dossierPatient"
+            formControlName="dossierPatient"
+            [compareWith]="compareDossierPatient"
+          >
+            <option [ngValue]="null"></option>
+            @for (dossierPatientOption of dossierPatientsSharedCollection; track $index) {
+              <option [ngValue]="dossierPatientOption">{{ dossierPatientOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

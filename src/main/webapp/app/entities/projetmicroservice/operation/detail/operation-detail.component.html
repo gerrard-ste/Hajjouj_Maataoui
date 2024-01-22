@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (operation) {
+      <div>
+        <h2 data-cy="operationDetailsHeading"><span>Operation</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ operation.id }}</span>
+          </dd>
+          <dt><span>Date</span></dt>
+          <dd>
+            <span>{{ operation.date | formatMediumDate }}</span>
+          </dd>
+          <dt><span>Heure</span></dt>
+          <dd>
+            <span>{{ operation.heure | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Urgence</span></dt>
+          <dd>
+            <span>{{ operation.urgence }}</span>
+          </dd>
+          <dt><span>Ressources</span></dt>
+          <dd>
+            @if (operation.ressources) {
+              <div>
+                <a [routerLink]="['/ressources', operation.ressources.id, 'view']">{{ operation.ressources.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span>Salle Operation</span></dt>
+          <dd>
+            @if (operation.salleOperation) {
+              <div>
+                <a [routerLink]="['/salle-operation', operation.salleOperation.id, 'view']">{{ operation.salleOperation.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span>Personnel</span></dt>
+          <dd>
+            @if (operation.personnel) {
+              <div>
+                <a [routerLink]="['/medecin', operation.personnel.id, 'view']">{{ operation.personnel.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span>Dossier Patient</span></dt>
+          <dd>
+            @if (operation.dossierPatient) {
+              <div>
+                <a [routerLink]="['/dossier-patient', operation.dossierPatient.id, 'view']">{{ operation.dossierPatient.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/projetmicroservice/operation', operation.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

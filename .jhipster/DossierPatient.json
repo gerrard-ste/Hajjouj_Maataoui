@@ -1,0 +1,23 @@
+{
+  "annotations": {
+    "changelogDate": "20240118210737"
+  },
+  "applications": "*",
+  "clientRootFolder": "projetmicroservice",
+  "databaseType": "sql",
+  "entityTableName": "dossier_patient",
+  "fields": [
+    {
+      "fieldName": "informationsPatient",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "operationsPrevues",
+      "fieldType": "String"
+    }
+  ],
+  "microserviceName": "projetmicroservice",
+  "name": "DossierPatient",
+  "relationships": [],
+  "searchEngine": "no"
+}

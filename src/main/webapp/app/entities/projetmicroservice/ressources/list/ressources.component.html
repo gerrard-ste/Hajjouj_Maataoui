@@ -1,0 +1,130 @@
+<div>
+  <h2 id="page-heading" data-cy="RessourcesHeading">
+    <span>Ressources</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-ressources"
+        [routerLink]="['/projetmicroservice/ressources/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Créer un nouveau Ressources</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (ressources?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span>Aucun Ressources trouvé</span>
+    </div>
+  }
+
+  @if (ressources && ressources.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span>ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type">
+              <div class="d-flex">
+                <span>Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="disponibilite">
+              <div class="d-flex">
+                <span>Disponibilite</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="salleOperation.id">
+              <div class="d-flex">
+                <span>Salle Operation</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="personnel.id">
+              <div class="d-flex">
+                <span>Personnel</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (ressources of ressources; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/projetmicroservice/ressources', ressources.id, 'view']">{{ ressources.id }}</a>
+              </td>
+              <td>{{ ressources.type }}</td>
+              <td>{{ ressources.disponibilite }}</td>
+              <td>
+                @if (ressources.salleOperation) {
+                  <div>
+                    <a [routerLink]="['/projetmicroservice/salle-operation', ressources.salleOperation.id, 'view']">{{
+                      ressources.salleOperation.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (ressources.personnel) {
+                  <div>
+                    <a [routerLink]="['/projetmicroservice/medecin', ressources.personnel.id, 'view']">{{ ressources.personnel.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/projetmicroservice/ressources', ressources.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline">Voir</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/projetmicroservice/ressources', ressources.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(ressources)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (ressources) {
+      <div>
+        <h2 data-cy="ressourcesDetailsHeading"><span>Ressources</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ ressources.id }}</span>
+          </dd>
+          <dt><span>Type</span></dt>
+          <dd>
+            <span>{{ ressources.type }}</span>
+          </dd>
+          <dt><span>Disponibilite</span></dt>
+          <dd>
+            <span>{{ ressources.disponibilite }}</span>
+          </dd>
+          <dt><span>Salle Operation</span></dt>
+          <dd>
+            @if (ressources.salleOperation) {
+              <div>
+                <a [routerLink]="['/salle-operation', ressources.salleOperation.id, 'view']">{{ ressources.salleOperation.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span>Personnel</span></dt>
+          <dd>
+            @if (ressources.personnel) {
+              <div>
+                <a [routerLink]="['/medecin', ressources.personnel.id, 'view']">{{ ressources.personnel.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/projetmicroservice/ressources', ressources.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-patient-heading" data-cy="PatientCreateUpdateHeading">Créer ou éditer un Patient</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_prenom">Prenom</label>
+          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_historiqueMedical">Historique Medical</label>
+          <input
+            type="text"
+            class="form-control"
+            name="historiqueMedical"
+            id="field_historiqueMedical"
+            data-cy="historiqueMedical"
+            formControlName="historiqueMedical"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dossierPatient">Dossier Patient</label>
+          <select
+            class="form-control"
+            id="field_dossierPatient"
+            data-cy="dossierPatient"
+            name="dossierPatient"
+            formControlName="dossierPatient"
+            [compareWith]="compareDossierPatient"
+          >
+            <option [ngValue]="null"></option>
+            @for (dossierPatientOption of dossierPatientsSharedCollection; track $index) {
+              <option [ngValue]="dossierPatientOption">{{ dossierPatientOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_consentementInformatise">Consentement Informatise</label>
+          <select
+            class="form-control"
+            id="field_consentementInformatise"
+            data-cy="consentementInformatise"
+            name="consentementInformatise"
+            formControlName="consentementInformatise"
+            [compareWith]="compareConsentementInformatise"
+          >
+            <option [ngValue]="null"></option>
+            @for (consentementInformatiseOption of consentementInformatisesSharedCollection; track $index) {
+              <option [ngValue]="consentementInformatiseOption">{{ consentementInformatiseOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

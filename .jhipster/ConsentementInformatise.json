@@ -1,0 +1,23 @@
+{
+  "annotations": {
+    "changelogDate": "20240118210637"
+  },
+  "applications": "*",
+  "clientRootFolder": "projetmicroservice",
+  "databaseType": "sql",
+  "entityTableName": "consentement_informatise",
+  "fields": [
+    {
+      "fieldName": "informationsPatient",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "consentementObtenu",
+      "fieldType": "Boolean"
+    }
+  ],
+  "microserviceName": "projetmicroservice",
+  "name": "ConsentementInformatise",
+  "relationships": [],
+  "searchEngine": "no"
+}

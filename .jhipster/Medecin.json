@@ -1,0 +1,31 @@
+{
+  "annotations": {
+    "changelogDate": "20240118210837"
+  },
+  "applications": "*",
+  "clientRootFolder": "projetmicroservice",
+  "databaseType": "sql",
+  "entityTableName": "medecin",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "role",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "disponibilite",
+      "fieldType": "Boolean"
+    }
+  ],
+  "microserviceName": "projetmicroservice",
+  "name": "Medecin",
+  "relationships": [],
+  "searchEngine": "no"
+}

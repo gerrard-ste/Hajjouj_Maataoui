@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Operation.
+    -->
+    <changeSet id="20240118210937-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="ressources_id"
+                                 baseTableName="operation"
+                                 constraintName="fk_operation__ressources_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ressources"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="salle_operation_id"
+                                 baseTableName="operation"
+                                 constraintName="fk_operation__salle_operation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="salle_operation"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="personnel_id"
+                                 baseTableName="operation"
+                                 constraintName="fk_operation__personnel_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="medecin"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="dossier_patient_id"
+                                 baseTableName="operation"
+                                 constraintName="fk_operation__dossier_patient_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dossier_patient"
+                                 />
+    </changeSet>
+</databaseChangeLog>

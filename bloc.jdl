@@ -1,0 +1,79 @@
+// Updated Patient entity with a unique name for the consentementInformatise property
+entity Patient {
+  nom String,
+  prenom String,
+  historiqueMedical String,
+}
+// Operation
+entity Operation {
+  date LocalDate,
+  heure Instant,
+  urgence Boolean
+}
+
+
+// Ressources
+entity Ressources {
+  type String,
+  disponibilite Boolean
+}
+
+// SalleOperation
+entity SalleOperation {
+  equipementsDisponibles String,
+  disponibilite Boolean
+}
+
+// Personnel
+entity Medecin {
+  nom String,
+  prenom String,
+  role String,
+  disponibilite Boolean
+}
+
+// DossierPatient
+entity DossierPatient {
+  informationsPatient String,
+  operationsPrevues String
+}
+
+// ConsentementInformatise
+entity ConsentementInformatise {
+  informationsPatient String,
+  consentementObtenu Boolean
+}
+// Relations
+
+// Relationships
+relationship ManyToOne {
+  Operation{ressources} to Ressources
+}
+
+relationship ManyToOne {
+  Operation{salleOperation} to SalleOperation
+}
+
+relationship ManyToOne {
+  Operation{personnel} to Medecin
+}
+
+relationship ManyToOne {
+  Patient{dossierPatient} to DossierPatient
+}
+
+relationship ManyToOne {
+  Patient{consentementInformatise} to ConsentementInformatise
+}
+
+relationship ManyToOne {
+  Operation{dossierPatient} to DossierPatient
+}
+
+relationship ManyToOne {
+  Ressources{salleOperation} to SalleOperation
+}
+
+relationship ManyToOne {
+  Ressources{personnel} to Medecin
+}

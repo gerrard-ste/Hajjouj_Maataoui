@@ -1,0 +1,166 @@
+<div>
+  <h2 id="page-heading" data-cy="OperationHeading">
+    <span>Operations</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-operation"
+        [routerLink]="['/projetmicroservice/operation/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Créer un nouveau Operation</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (operations?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span>Aucun Operation trouvé</span>
+    </div>
+  }
+
+  @if (operations && operations.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span>ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="date">
+              <div class="d-flex">
+                <span>Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="heure">
+              <div class="d-flex">
+                <span>Heure</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="urgence">
+              <div class="d-flex">
+                <span>Urgence</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="ressources.id">
+              <div class="d-flex">
+                <span>Ressources</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="salleOperation.id">
+              <div class="d-flex">
+                <span>Salle Operation</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="personnel.id">
+              <div class="d-flex">
+                <span>Personnel</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dossierPatient.id">
+              <div class="d-flex">
+                <span>Dossier Patient</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (operation of operations; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/projetmicroservice/operation', operation.id, 'view']">{{ operation.id }}</a>
+              </td>
+              <td>{{ operation.date | formatMediumDate }}</td>
+              <td>{{ operation.heure | formatMediumDatetime }}</td>
+              <td>{{ operation.urgence }}</td>
+              <td>
+                @if (operation.ressources) {
+                  <div>
+                    <a [routerLink]="['/projetmicroservice/ressources', operation.ressources.id, 'view']">{{ operation.ressources.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (operation.salleOperation) {
+                  <div>
+                    <a [routerLink]="['/projetmicroservice/salle-operation', operation.salleOperation.id, 'view']">{{
+                      operation.salleOperation.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (operation.personnel) {
+                  <div>
+                    <a [routerLink]="['/projetmicroservice/medecin', operation.personnel.id, 'view']">{{ operation.personnel.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (operation.dossierPatient) {
+                  <div>
+                    <a [routerLink]="['/projetmicroservice/dossier-patient', operation.dossierPatient.id, 'view']">{{
+                      operation.dossierPatient.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/projetmicroservice/operation', operation.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline">Voir</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/projetmicroservice/operation', operation.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(operation)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
